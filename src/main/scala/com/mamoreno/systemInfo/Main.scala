@@ -1,4 +1,5 @@
-import com.mamoreno.SystemInfo.os.LinuxInfo
+import com.mamoreno.systemInfo.os.LinuxInfo
+import com.mamoreno.systemInfo.os.MacOsInfo
 
 object Main extends App {
 
@@ -7,8 +8,7 @@ object Main extends App {
 
 	def getCpuInfo() = osName match {
 		case "Linux" => print(LinuxInfo())
+		case "Mac OS X" => print(MacOsInfo())
 		case _ => print(osName + " not supported")
 	}
 }
-
-// Main.main(Array())
