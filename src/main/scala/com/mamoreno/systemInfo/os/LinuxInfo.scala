@@ -4,9 +4,7 @@ import scala.language.postfixOps
 import sys.process._
 import com.mamoreno.systemInfo.SystemInfo
 
-object LinuxInfo extends SystemInfo with LinuxCpuInfoCommand with LinuxMemoryInfoCommand {
-	def apply() = toString
-}
+object LinuxInfo extends SystemInfo with LinuxCpuInfoCommand with LinuxMemoryInfoCommand
 
 trait LinuxCpuInfoCommand {
 	lazy val cpuInfo = ("cat /proc/cpuinfo" !!).split("\n")
@@ -22,8 +20,8 @@ trait LinuxMemoryInfoCommand {
 	def freeMemory = parseLineFor("MemFree")
 	def usedMemory = totalMemory - freeMemory
 
-	def parseLineFor(s: String): Double = {
-		val line = memoryInfo.filter(x => x.startsWith(s)).last.split(":").last.trim.split(" ")(0).toDouble
+	private def parseLineFor(key: String): Double = {
+		val line = memoryInfo.filter(x => x.startsWith(key)).last.split(":").last.trim.split(" ")(0).toDouble
 		line / (1024 * 1024)
 	}
 }
